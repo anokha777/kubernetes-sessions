@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  # Unique key of the Service instance
+  name: project1-service
+spec:
+  selector: # this selector defines which pod will be connected using this service
+    app: project1
+  
+  ports:
+    - name: http
+      port: 9000 # incoming request on port
+      nodePort: 30001
+      # targetPort: 9000 # pod's container port
+  type: NodePort

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-example
+spec:
+  containers:
+  - name: my-webapp
+    # image: anokhadocker/project-1-rel0:release0
+    image: project-1-rel0:release999
+    imagePullPolicy: Never

@@ -1,0 +1,3 @@
+use kubedb;
+
+db.kubebook.insert({ name: "Kubectl", website: "kubectlbook.com" });

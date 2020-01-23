@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+spec:
+  selector:
+    matchLabels:
+      app: mongodb
+  replicas: 1
+  template: # template for the pods
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+      - name: mongodb
+        image: mongo:4
+        volumeMounts:
+          - name: mongo-persistent-storage
+            mountPath: /data/db
+
+      volumes:
+        - name: mongo-persistent-storage
+          # Pointer to the configuration of how we want to mount to be implemented
+          persistentVolumeClaim:
+            claimName: mongo-persistent-volume-claim
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: my-mongodb
+spec:
+  type: NodePort
+  selector:
+    app: mongodb
+  ports:
+    - port: 27017
+      targetPort: 27017
+      nodePort: 30018

@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: project1-replicaset
+spec:
+  selector: # which is the pod who need to be kept inside this replicaset
+    matchLabels:
+      app: project1
+  replicas: 2
+  template: # template for the pod
+
+    metadata: # from here pod definition starts
+      name: project1 # not so important, it can be anything
+      labels:
+        app: project1
+    spec:
+      containers:
+      - name: my-webapp
+        image: anokhadocker/project-1:release0
